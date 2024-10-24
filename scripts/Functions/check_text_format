@@ -1,0 +1,21 @@
+"""
+  Pour d'autres formatations, modifier le regex (et ev. nom des variables)
+"""
+
+def is_clf(logs):
+    """
+    Checks if the log file is in Common Log Format (CLF).
+
+    :param logs: file content
+    :return: True if the file is in CLF format, False otherwise
+    """
+    i = 0
+    clf_pattern = r'^(\S+) (\S+) (\S+) \[(.+?)\] "(\S+) (.+?) (\S+)" (\d{3}) (\d+|-)$'
+    for lines in logs.splitlines():
+            i = i + 1
+            if bool(re.match(clf_pattern, lines)) is False:
+                print("line" + i + "is not in common log format.")
+                sys.exit(1)
+            else:
+                print("The file is in Common Log Format (CLF). Proceeding...")
+                return True
